@@ -1,0 +1,93 @@
+# ST7789VW Commands
+# see datasheet for more info
+
+# Command Table 1
+
+NOP = 0x00  # NOP
+SWRESET = 0x01  # Software Reset
+RDDID = 0x04  # Read Display ID
+RDDST = 0x09  # Read Display Status
+RDDPM = 0x0A  # Read Display Power Mode
+RDDMADCTL = 0x0B  # Read Display MADCTL
+RDDCOLMOD = 0x0C  # Read Display Pixel Format
+RDDIM = 0x0D  # Read Display Image Mode
+RDDSM = 0x0E  # Read Display Signal Mode
+RDDSDR = 0x0F  # Read Display Self-Diagnostic Result
+SLPIN = 0x10  # Sleep in
+SLPOUT = 0x11  # Sleep Out
+PTLON = 0x12  # Partial Display Mode On
+NORON = 0x13  # Normal Display Mode On
+INVOFF = 0x20  # Display Inversion Off
+INVON = 0x21  # Display Inversion On
+GAMSET = 0x26  # Gamma Set
+DISPOFF = 0x28  # Display Off
+DISPON = 0x29  # Display On
+CASET = 0x2A  # Column Address Set
+RASET = 0x2B  # Row Address Set
+RAMWR = 0x2C  # Memory Write
+RAMRD = 0x2E  # Memory Read
+PTLAR = 0x30  # Partial Area
+VSCRDEF = 0x33  # Vertical Scrolling Definition
+TEOFF = 0x34  # Tearing Effect Line OFF
+TEON = 0x35  # Tearing Effect Line On
+MADCTL = 0x36  # Memory Data Access Control
+VSCSAD = 0x37  # Vertical Scroll Start Address of RAM
+IDMOFF = 0x38  # Idle Mode Off
+IDMON = 0x39  # Idle mode on
+COLMOD = 0x3A  # Interface Pixel Format
+WRMEMC = 0x3C  # Write Memory Continue
+RDMEMC = 0x3E  # Read Memory Continue
+STE = 0x44  # Set Tear Scanline
+GSCAN = 0x45  # Get Scanline
+WRDISBV = 0x51  # Write Display Brightness
+RDDISBV = 0x52  # Read Display Brightness Value
+WRCTRLD = 0x53  # Write CTRL Display
+RDCTRLD = 0x54  # Read CTRL Value Display
+WRCACE = 0x55  # Write Content Adaptive Brightness Control and Color Enhancement
+RDCABC = 0x56  # Read Content Adaptive Brightness Control
+WRCABCMB = 0x5E  # Write CABC Minimum Brightness
+RDCABCMB = 0x5F  # Read CABC Minimum Brightness
+RDABCSDR = 0x68  # Read Automatic Brightness Control Self-Diagnostic Result
+RDID1 = 0xDA  # Read ID1
+RDID2 = 0xDB  # Read ID2
+RDID3 = 0xDC  # Read ID3
+
+# Command Table 2
+
+RAMCTRL = 0xB0  # RAM Control
+RGBCTRL = 0xB1  # RGB Interface Control
+PORCTRL = 0xB2  # Porch Setting
+FRCTRL1 = 0xB3  # Frame Rate Control 1 (In partial mode/ idle colors)
+PARCTRL = 0xB5  # Partial Control
+GCTRL = 0xB7  # Gate Control
+GTADJ = 0xB8  # Gate On Timing Adjustment
+DGMEN = 0xBA  # Digital Gamma Enable
+VCOMS = 0xBB  # VCOM Setting
+POWSAVE = 0xBC  # Power Saving Mode
+DLPOFFSAVE = 0xBD  # Display off power save
+LCMCTRL = 0xC0  # LCM Control
+IDSET = 0xC1  # ID Code Setting
+VDVVRHEN = 0xC2  # VDV and VRH Command Enable
+VRHS = 0xC3  # VRH Set
+VDVS = 0xC4  # VDV Set
+VCMOFSET = 0xC5  # VCOM Offset Set
+FRCTRL2 = 0xC6  # Frame Rate Control in Normal Mode
+CABCCTRL = 0xC7  # CABC Control
+REGSEL1 = 0xC8  # Register Value Selection 1
+REGSEL2 = 0xCA  # Register Value Selection 2
+PWMFRSEL = 0xCC  # PWM Frequency Selection
+PWCTRL1 = 0xD0  # Power Control 1
+VAPVANEN = 0xD2  # Enable VAP/VAN signal output
+CMD2EN = 0xDF  # Command 2 Enable
+PVGAMCTRL = 0xE0  # Positive Voltage Gamma Control
+NVGAMCTRL = 0xE1  # Negative Voltage Gamma Control
+DGMLUTR = 0xE2  # Digital Gamma Look-up Table for Red
+DGMLUTB = 0xE3  # Digital Gamma Look-up Table for Blue
+GATECTRL = 0xE4  # Gate Control
+SPI2EN = 0xE7  # SPI2 Enable
+PWCTRL2 = 0xE8  # Power Control 2
+EQCTRL = 0xE9  # Equalize time control
+PROMCTRL = 0xEC  # Program Mode Control
+PROMEN = 0xFA  # Program Mode Enable
+NVMSET = 0xFC  # NVM Setting
+PROMACT = 0xFE  # Program action
