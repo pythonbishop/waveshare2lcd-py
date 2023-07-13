@@ -1,0 +1,38 @@
+- this reference attempts to use language, names, and designations from the ST7789VW datasheet whenever possible
+- if you do not understand the meaning of specific terms or phrases (e.g Content Adaptive Brightness), the datasheet is a good place to start-+
+
+IMPORTANT NOTES:
+
+- display is configured in 4 line serial mode
+- The serial output pin (SD0) is not exposed, so it is not possible to read data from the display
+- while Inversion Mode is OFF colors appear inverted on the display, turn on for non-inverted colors (see INVON and INVOFF commands)
+
+POWER ON CONFIGURATION:
+
+- this is a non-exhastive list of the states of some important modes and parameters after the Power On Sequence
+
+Display Inversion                   OFF
+Display                             OFF
+Normal Display Mode                 ON
+Idle Mode                           OFF
+Interface Pixel Format              18 bits/pixel (RGB666)
+Sleep In                            ON
+Column Address Range                Full Display (0-240)
+    XS                                  0x0000
+    XE                                  0x00EF
+Row Address Range                   Full Display (0-240)
+    YS                                  0x0000
+    YE                                  0x013F
+
+- also important are the parameters controlled by MADCTL: MY, MX, MV, ML, RGB, MH
+- how these parameters interact with each other and affect the display output is relatively complicated to explain, so just read the docs
+
+- At the bare minimum, the display must start the Power On Sequence, exit sleep mode, turn on the display, and turn on display inversion in order to begin using the display
+
+CHANGING BRIGHTNESS:
+
+- the WRDISBV command allows you to write a brightness value to the display
+- unfortunately, WRDISBV doesn't seem to do anything even with BCTRL On
+- the brightness can instead be controlled with PWM on the BL pin
+
+- I have not tested the Content Adaptive Brightness Control, Display Dimming, or any other brightness related commands/modes
