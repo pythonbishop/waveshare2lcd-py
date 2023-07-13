@@ -20,7 +20,7 @@ Sleep In                            ON
 Column Address Range                Full Display (0-240)
     XS                                  0x0000
     XE                                  0x00EF
-Row Address Range                   Full Display (0-240)
+Row Address Range                   Full Display (0-320)
     YS                                  0x0000
     YE                                  0x013F
 
