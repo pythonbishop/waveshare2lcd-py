@@ -13,6 +13,7 @@ class Lcd:
     PIN_RST = 17
 
     def init(self):
+        """initialize display"""
         if GPIO.getmode() != GPIO.BCM:
             raise AssertionError("GPIO mode is not set to BCM")
 
@@ -24,7 +25,7 @@ class Lcd:
         self.bl_pwm = GPIO.PWM(self.PIN_BL, 1000)
         self.bl_pwm.start(100)
 
-        self.spi.open(0, 0 )
+        self.spi.open(0, 0)
         self.spi.max_speed_hz = 62000000
         self.spi.mode = 0b00
 
@@ -47,31 +48,38 @@ class Lcd:
         self.cmd(DISPON)        # turn on display
 
     def poweroff(self):
+        """cleanup spi and gpio"""
         GPIO.output(self.PIN_RST, GPIO.LOW)
         GPIO.output(self.PIN_DC, GPIO.LOW)
         GPIO.cleanup()
         self.spi.close()
 
     def cmd(self, code):
+        """send a command"""
         GPIO.output(self.PIN_DC, GPIO.LOW)
         self.spi.writebytes([code])
 
     def data(self, val):
+        """send one byte of data"""
         GPIO.output(self.PIN_DC, GPIO.HIGH)
         self.spi.writebytes([val])
 
     def data_buffer(self, buffer):
+        """send more than one byte of data"""
         GPIO.output(self.PIN_DC, GPIO.HIGH)
         for i in range(0, len(buffer), 4096):
             self.spi.writebytes(buffer[i:i+4096])
     
     def color_byte_format(self, val):
+        """return 6 bit color channel value in byte format expected by display"""
         return (val << 2) & 255
 
     def color_format(self, r, g, b):
+        """return 18 bit color value in 3 byte sequence expected by display"""
         return (r << 2) & 255, (g << 2) & 255, (b << 2) & 255
 
     def write_pixel(self, x, y, r, g, b):
+        """set pixel at position (x, y) to color"""
 
         self.cmd(CASET)
         self.data(x >> 8)
@@ -89,6 +97,7 @@ class Lcd:
         self.data_buffer(self.color_format(r, g, b))
 
     def write_frame(self, buffer):
+        """write full frame of data to display memory"""
         self.cmd(CASET)      # set column address range to full screen (0-240)
         self.data(0x00)
         self.data(0x00)
@@ -119,10 +128,20 @@ class Lcd:
                 self.write_pixel(x, y, r, g, b)
 
     def test_backlight(self):
-        for i in range(3):
+        x = 0
+        up = True
+        for i in range(5):
+            if x == 100 and up:
+                up = False
+            elif x == 0 and not up:
+                up = True
             for t in range (100):
-                self.bl_pwm.ChangeDutyCycle(t)
-                time.sleep(0.02)
+                if up:
+                    x += 1
+                else:
+                    x -= 1
+                self.bl_pwm.ChangeDutyCycle(x)
+                time.sleep(0.01)
 
     def splash(self):
         buffer = np.zeros(240*320*3, dtype=np.uint8)
@@ -158,6 +177,7 @@ if __name__ == "__main__":
     time.sleep(2)
     lcd.splash()
     time.sleep(2)
+    lcd.test_backlight()
 
     buffer = np.ones(240*320*3, dtype=np.uint8)
     buffer *= 0
