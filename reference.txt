@@ -1,5 +1,4 @@
-- this reference attempts to use language, names, and designations from the ST7789VW datasheet whenever possible
-- if you do not understand the meaning of specific terms or phrases (e.g Content Adaptive Brightness), the datasheet is a good place to start-+
+- more info can be found in the ST7789VW datasheet
 
 IMPORTANT NOTES:
 
@@ -9,7 +8,7 @@ IMPORTANT NOTES:
 
 POWER ON CONFIGURATION:
 
-- this is a non-exhastive list of the states of some important modes and parameters after the Power On Sequence
+- this is a list of the default states of some important modes and parameters after the Power On Sequence
 
 Display Inversion                   OFF
 Display                             OFF
@@ -25,14 +24,13 @@ Row Address Range                   Full Display (0-320)
     YE                                  0x013F
 
 - also important are the parameters controlled by MADCTL: MY, MX, MV, ML, RGB, MH
-- how these parameters interact with each other and affect the display output is relatively complicated to explain, so just read the docs
+- how these parameters interact with each other and affect the display output are better explained in the datasheet
 
-- At the bare minimum, the display must start the Power On Sequence, exit sleep mode, turn on the display, and turn on display inversion in order to begin using the display
+- At the bare minimum, you must start the Power On Sequence, exit sleep mode, turn on the display, and turn on display inversion in order to begin using it
 
 CHANGING BRIGHTNESS:
 
-- the WRDISBV command allows you to write a brightness value to the display
-- unfortunately, WRDISBV doesn't seem to do anything even with BCTRL On
-- the brightness can instead be controlled with PWM on the BL pin
+- According to the datasheet, the WRDISBV command allows you to write a brightness value to the display. Unfortunately, WRDISBV doesn't seem to do anything even with BCTRL On.
+- I may be missing something important, but brightness can be controlled with PWM on the BL pin instead. 
 
 - I have not tested the Content Adaptive Brightness Control, Display Dimming, or any other brightness related commands/modes
